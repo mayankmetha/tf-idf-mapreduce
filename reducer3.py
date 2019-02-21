@@ -13,7 +13,7 @@ def reducer3():
         # parse input
         word,doc,tf=line.split('\t',2)
         
-        #push data to tmp storage
+        # push data to tmp storage
         list_word.append(word)
         list_doc.append(doc)
         list_tf.append(tf)
@@ -27,25 +27,20 @@ def reducer3():
         if current_word == list_word[_]:
             current_count += 1
         else:
-            list_idf.append(current_count)
-            print(current_count)
+            for i in range(current_count):
+                list_idf.append(current_count)
             current_word = list_word[_]
             current_count = 1
+    list_idf.append(current_count)
 
     # compute idf
     idf = numpy.array(list_idf)
+    numpy.seterr(divide='ignore', invalid='ignore')
     numpy.log(numpy.divide(total_doc,idf))
 
-    i = 0
-    current_word = None
-    for _ in range(len(list_word)):
+    for x in range(len(list_word)):
         # compute tf-idf
-        if current_word == list_word[_]:
-            list_tf[_] = list_tf[_]*idf[i]
-            print('%s\t%s\t%s'%(list_word[_],list_doc[_],list_tf[_]))
-        else:
-            current_word = list_word[_]
-            i = i+1
+        print('%s\t%s\t%f'%(list_word[x],list_doc[x],(float(list_tf[x])*float(idf[x]))))
 
 if __name__ == '__main__':
     reducer3()
