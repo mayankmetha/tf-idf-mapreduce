@@ -6,6 +6,12 @@ import re
 
 def mapper1():
     for line in sys.stdin:
+        #get input file name
+        input_file = None
+        try:
+            input_file = os.environ['mapreduce_map_input_file']
+        except KeyError:
+            input_file = os.environ['map_input_file']
         # getting input stream
         words = nltk.word_tokenize(line.strip())
         # convert to lowercase
@@ -21,7 +27,7 @@ def mapper1():
         final_token = [lemmatizer.lemmatize(w) for w in filtered_tokens]
         # output : word corpus 1
         for word in final_token:
-            print('%s\t%s\t1'%(os.getenv('mapreduce_map_input_file','noname'),word))
+            print('%s\t%s\t1'%(input_file,word))
 
 if __name__ == '__main__':
     mapper1()
