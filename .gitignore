@@ -1,2 +1,6 @@
 .DS_Store
 *.hdfs
+dataset
+output
+phase1
+phase2
