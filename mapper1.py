@@ -28,7 +28,6 @@ def mapper1():
         # output : word corpus 1
         for word in final_token:
             print('%s\t%s\t1'%(input_file,word))
-            #print('%s\t%s\t1'%(input_file,word))
 
 if __name__ == '__main__':
     mapper1()
